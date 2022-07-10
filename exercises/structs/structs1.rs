@@ -1,8 +1,6 @@
 // structs1.rs
 // Address all the TODOs to make the tests pass!
 
-// I AM NOT DONE
-
 struct ColorClassicStruct {
     // TODO: Something goes here
     name : String,
@@ -13,13 +11,6 @@ struct ColorTupleStruct(String, String);
 
 #[derive(Debug)]
 struct UnitStruct;
-
-impl UnitStruct
-{
-    pub fn to_string() -> String{
-        "test".to_string()
-    }
-}
 
 #[cfg(test)]
 mod tests {
