@@ -33,16 +33,37 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of Person
 // Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        if s.len() == 0 {
+            return Person::default();
+        }
+        let mut split  = s.split(',').collect::<Vec<_>>().into_iter();
+        
+        if split.len() != 2 {
+            return Person::default();
+        }
+
+        if let Some(name) = split.next() {
+            if name.len() > 0 {
+                if let Some(age) = split.next() {
+                    if let Ok(ageInt) = age.parse() {
+                        //if let None = split.next(){ //better first check that split count is 2 before
+                            return Person { name: name.to_string(), age: ageInt };
+                        //}
+                    }
+                }
+            }
+        }        
+        
+        return Person::default();
     }
 }
 
 fn main() {
     // Use the `from` function
-    let p1 = Person::from("Mark,20");
+    let p1 = Person::from("Mark,20");  
     // Since From is implemented for Person, we should be able to use Into
     let p2: Person = "Gerald,70".into();
     println!("{:?}", p1);
